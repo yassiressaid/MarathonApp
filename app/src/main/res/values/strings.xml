@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">marathonApp</string>
+    <string name="bienvenue_au_youssoufia_marathon">Bienvenue au Youssoufia Marathon</string>
+    <string name="veuillez_saisir_votre_nom">Veuillez saisir votre nom</string>
+    <string name="veuillez_saisir_votre_prenom">Veuillez Saisir Votre Prenom</string>
+    <string name="invalid_name">Please enter your first name</string>
+    <string name="invalid_first_name">Please enter your first name</string>
+    <string name="invalid_last_name">Please enter your last name</string>
+    <string name="invalid_phone">Please enter a valide phone number</string>
+    <string name="invalid_email">Please enter a valide email</string>
+</resources>
