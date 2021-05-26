@@ -1,7 +1,12 @@
 package com.example.marathonapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -44,12 +49,25 @@ public class FormActivity extends AppCompatActivity {
                 "[0-9]{2}[0-9]{8}",R.string.invalid_phone);
         awesomeValidation.addValidation(this,R.id.et_email,
                 Patterns.EMAIL_ADDRESS,R.string.invalid_email);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("My Notification","My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (awesomeValidation.validate()) {
                     Toast.makeText(getApplicationContext()
                             , "Form Validate Successfully...",Toast.LENGTH_SHORT).show();
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(FormActivity.this,"My Notification");
+                    builder.setContentTitle("Form Validated");
+                    builder.setContentText("Hi "+firstNameInput.getText() +" "+ lastNameInput.getText()+ " Your personal information has been validated");
+                    builder.setSmallIcon(R.drawable.ic_launcher_background);
+                    builder.setAutoCancel(true);
+
+                    NotificationManagerCompat managerCompat = NotificationManagerCompat.from(FormActivity.this);
+                    managerCompat.notify(1,builder.build());
                 }else {
                     Toast.makeText(getApplicationContext(), "Validation Failed"
                             ,Toast.LENGTH_SHORT).show();
